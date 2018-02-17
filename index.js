@@ -12,10 +12,6 @@ server.listen(port, function () {
 // Routing
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
 // Chatroom
 
 var numUsers = 0;
@@ -82,4 +78,31 @@ io.on('connection', function (socket) {
     }
   });
 });
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});
 
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+  });
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
+/*
+server.listen(3000, function(){
+  console.log('listening on *:3000');
+});
+*/
+
+/*
+*
+
+
+*/
