@@ -18,6 +18,10 @@ var numUsers = 0;
 
 io.on('connection', function (socket) {
   var addedUser = false;
+    socket.emit('mensaje', {text: 'Bienvenido.'});
+      socket.broadcast.emit('mensaje', {text: 'Un nuevo usuario se ha conectado.'});
+      socket.on('disconnect', function(){
+         socket.broadcast.emit('mensaje', {text: 'Un usuario se ha desconectado.'});
   
   // For DEMO compatibility
   socket.on('chat message', function(msg){
