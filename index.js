@@ -19,7 +19,7 @@ var numUsers = 0;
 io.on('connection', function (socket) {
   var addedUser = false;
   
-  // For DEMO compatibility  
+  // For DEMO compatibility
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
